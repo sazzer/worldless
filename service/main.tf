@@ -32,6 +32,10 @@ provider "random" {
   version = "~> 2.3.0"
 }
 
+provider "template" {
+  version = "~> 2.1.2"
+}
+
 resource "random_id" "id" {
   byte_length = 8
 }
