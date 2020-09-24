@@ -7,13 +7,9 @@ resource "aws_api_gateway_rest_api" "worldless" {
 # API Gateway Deployment for connecting lambdas to the gateway
 resource "aws_api_gateway_deployment" "worldless" {
   depends_on = [
-    aws_api_gateway_integration.users-user-exists
+    module.users.gateway_integrations
   ]
 
   rest_api_id = aws_api_gateway_rest_api.worldless.id
   stage_name  = "v1"
-}
-
-output "base_url" {
-  value = aws_api_gateway_deployment.worldless.invoke_url
 }
