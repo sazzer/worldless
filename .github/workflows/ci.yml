@@ -10,6 +10,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - uses: actions/setup-go@v2
+        with:
+          go-version: "^1.14"
+
+      - name: Build Service
+        working-directory: service
+        run: ./build.sh
+
+      - name: Upload Lambdas
+        uses: actions/upload-artifact@v2
+        with:
+          name: lambdas
+          path: service/output/builds
+
   build-webapp:
     runs-on: ubuntu-latest
     steps:
@@ -28,6 +42,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Download Lambdas
+        uses: actions/download-artifact@v2
+        with:
+          name: lambdas
+          path: service/output/builds
 
       - uses: hashicorp/setup-terraform@v1
 
@@ -70,6 +90,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Download Lambdas
+        uses: actions/download-artifact@v2
+        with:
+          name: lambdas
+          path: service/output/builds
 
       - uses: hashicorp/setup-terraform@v1
 

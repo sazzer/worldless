@@ -1,7 +1,7 @@
 resource "aws_lambda_function" "user-exists" {
   function_name    = "${random_id.id.hex}-user-exists"
-  filename         = "output/lambdas/users/user-exists.zip"
-  source_code_hash = filebase64sha256("output/lambdas/users/user-exists.zip")
+  filename         = "output/builds/users/user-exists.zip"
+  source_code_hash = filebase64sha256("output/builds/users/user-exists.zip")
   handler          = "user-exists"
   role             = aws_iam_role.user-exists.arn
   runtime          = "go1.x"

@@ -12,12 +12,17 @@ for module in `ls -1 lambdas`; do
     done
 done
 
+rm -rf output/builds
+mkdir -p output/builds
+
 cd output/lambdas
 for module in `ls -1`; do
+    mkdir -p ../builds/$module
+
     cd $module
     for lambda in `ls -1`; do
         echo === Packaging $lambda for $module ===
-        zip $lambda.zip $lambda
+        zip ../../builds/$module/$lambda.zip $lambda
     done
     cd ..
 done
