@@ -35,6 +35,10 @@ jobs:
         working-directory: service
         run: terraform init
 
+      - name: Validate Stack
+        working-directory: service
+        run: terraform validate
+
       - name: Build Stack
         working-directory: service
         run: |
@@ -42,11 +46,15 @@ jobs:
           terraform plan
           terraform apply -auto-approve
 
+      - name: Destroy Stack
+        if: always()
+        working-directory: service
+        run: terraform destroy -auto-approve
+
       - name: Tidy up
         if: always()
         working-directory: service
         run: |
-          terraform destroy -auto-approve
           terraform workspace select default
           terraform workspace delete $GITHUB_SHA
 
