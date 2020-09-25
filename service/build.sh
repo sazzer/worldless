@@ -3,12 +3,12 @@
 rm -rf output/lambdas
 mkdir -p output/lambdas
 
-for module in `ls -1 lambdas`; do
+for module in `ls -1 modules`; do
     echo $module
     mkdir -p output/$module
-    for lambda in `ls -1 lambdas/$module/cmd`; do
+    for lambda in `ls -1 modules/$module/lambdas`; do
         echo === Compiling $lambda for $module ===
-        GOOS=linux GOARCH=amd64 go build -o ./output/lambdas/$module/$lambda lambdas/$module/cmd/$lambda/*
+        GOOS=linux GOARCH=amd64 go build -o ./output/lambdas/$module/$lambda modules/$module/lambdas/$lambda/*
     done
 done
 
