@@ -42,6 +42,7 @@ func handleRequest(req events.APIGatewayProxyRequest) (*events.APIGatewayProxyRe
 	if err != nil {
 		return nil, err
 	}
+
 	return res, nil
 }
 

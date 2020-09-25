@@ -14,6 +14,16 @@ jobs:
         with:
           go-version: "^1.14"
 
+      - name: Lint
+        uses: golangci/golangci-lint-action@v1
+        with:
+          version: v1.30
+          working-directory: service
+
+      - name: Test
+        working-directory: service
+        run: go test ./...
+
       - name: Build Service
         working-directory: service
         run: ./build.sh
